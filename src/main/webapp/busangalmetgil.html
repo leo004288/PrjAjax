@@ -3,8 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	
+	ul {
+		border: 1px solid black;
+		border-radius: 10px; 
+		margin:10px;
+		} 
+		
+	img {width:500px; height:300px;} 
+	
+</style>
 </head>
 <body>
-
+	<h2>부산 갈맷길 서비스</h2>
+	보고 싶은 페이지<input type="number" id="page" value="1" min="1">
+	<button>Get Data</button>
+	<div id="output"></div>
+	
+	
+	<script>
+	
+		const pageEl   = document.querySelector('#page')
+		const btnEl    = document.querySelector('button')
+		const outputEl = document.querySelector('#output')
+		
+		// btnEl 이 클릭되면
+		btnEl.addEventListener('click', function() {
+			// 서버에서 가져옴 : Get 방식
+			let url = 'http://apis.data.go.kr/6260000/fbusangmgtourinfo/getgmgtourinfo'
+			url    += '?ServiceKey=18151d56f4c325c1489ed0137f503b5cb51a30bfabd28674381d5128b7a49907'
+			url    += '&numOfRows=10'
+			url    += '&pageNo=' + pageEl.value
+			url    += '&resultType=json'
+			fetch(url)
+				.then(response => response.json())
+				.then(json     => {
+// 					console.log(json)
+// 					outputEl.innerHTML = JSON.stringify(json)
+					
+					let itemList   = json.response.body.items.item
+					let totalCount = parseInt(json.response.body.totalCount)
+					let numOfRows  = parseInt(json.response.body.numOfRows)
+					let maxPage    = Math.ceil(totalCount / numOfRows)
+					
+					pageEl.max = maxPage 
+// 					console.log(itemList)
+					dataDisplay(itemList)
+				})
+				.catch(error => console.log(error))
+		})
+		
+		
+		function dataDisplay(itemList) {
+			let html = ''
+			itemList.forEach( function(item, i) {
+				html += `
+					<ul>
+						<li>일련번호   : ${item.uc_seq      }</li>
+						<li>제목       : ${item.title       }</li>
+						<li>장소       : ${item.place       }</li>
+						<li>이름       : ${item.name        }</li>
+						<li>경도       : ${item.lng         }</li>
+						<li>위도       : ${item.lat         }</li>
+						<li>소개글     : ${item.itemcntnts  }</li>
+						<li>코스       : ${item.course      }</li>
+						<li>구간       : ${item.gugan       }</li>
+						<li>썸네일     : ${item.main_img_t  }</li>
+						<li><img src='https://www.visitbusan.net${item.main_img_t}'</li>
+						<li>메인이미지 : ${item.main_img_n}</li>
+						<li><img src='https://www.visitbusan.net${item.main_img_n}'</li>
+					</ul>
+				`
+			})
+			outputEl.innerHTML = html
+		}
+		
+	</script>
 </body>
 </html>
