@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script>
+	$(function() {
+		
+		$('button').on('click', function() {
+			let loc = '/data/data.html'
+			
+// 			1. old $.ajax()
+			$.ajax({
+				url     : loc,
+				data    : {name:'박지성', age:34},    // 서버에 넘겨줄 데이터 
+			    success : function(result) {
+			    	$('#output').html(result)
+			    },
+			    error : function(xhr) {
+			    	alert(xhr.status + ':' + xhr.textStatus) 
+			    }
+			})
+			
+// 			// 2. 새로운 $.ajax()
+// 			$.ajax({
+// 				url  : loc,
+// 				data : {name:'손흥민'} 
+// 			})
+// 			.done(function(result) {
+// 				$('#output').html(result)
+// 			})
+// 			.fail(function(error) {
+// 				console.log(error)
+// 			})
+			
+		})
+		
+	})
+</script>
+</head>
+<body>
+	<h2>JQuery Ajex 01</h2>
+	<button>Get Data</button>
+	<div id="output"></div>
+</body>
+</html>
