@@ -39,15 +39,15 @@
 			fetch(url)
 				.then(response => response.json())
 				.then(json     => {
-// 					console.log(json)
+ 					console.log(json)
 // 					outputEl.innerHTML = JSON.stringify(json)
 					
-					let itemList   = json.response.body.items.item
 					let totalCount = parseInt(json.response.body.totalCount)
 					let numOfRows  = parseInt(json.response.body.numOfRows)
 					let maxPage    = Math.ceil(totalCount / numOfRows)
+					pageEl.max     = maxPage 
 					
-					pageEl.max = maxPage 
+					let itemList   = json.response.body.items.item
 // 					console.log(itemList)
 					dataDisplay(itemList)
 				})
