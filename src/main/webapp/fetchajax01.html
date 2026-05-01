@@ -59,15 +59,17 @@
 			// body : 서버에 넘겨주는 정보들 : json 문자열로 보낸다
 //			fetch('https://jsonplaceholder.typicode.com/posts', {
 //			  method: 'POST',
+
+//			  // 클라이언트에서 서버로 보내는 정보의 type, application/json, application/xml, text/plain 
+//			  headers: {
+//			    'Content-type': 'application/json; charset=UTF-8',
+//			  },
 //			  body: JSON.stringify({
 //			    title: '게시글',
 //			    body: '내용',
 //			    userId: 1,
 //			  }),
-//			  // 클라이언트에서 서버로 보내는 정보의 type, application/json, application/xml, text/plain 
-//			  headers: {
-//			    'Content-type': 'application/json; charset=UTF-8',
-//			  },
+
 //			})
 //			// 요청한 후의 동작 : 응답한 정보를 json으로 변경
 //			  .then((response) => response.json())

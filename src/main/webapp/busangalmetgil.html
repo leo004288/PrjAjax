@@ -33,7 +33,7 @@
 			// 서버에서 가져옴 : Get 방식
 			let url = 'http://apis.data.go.kr/6260000/fbusangmgtourinfo/getgmgtourinfo'
 			url    += '?ServiceKey=18151d56f4c325c1489ed0137f503b5cb51a30bfabd28674381d5128b7a49907'
-			url    += '&numOfRows=10'
+			url    += '&numOfRows=10'   // 한페이지에 10개
 			url    += '&pageNo=' + pageEl.value
 			url    += '&resultType=json'
 			fetch(url)
@@ -42,6 +42,7 @@
  					console.log(json)
 // 					outputEl.innerHTML = JSON.stringify(json)
 					
+					// 조회한 데이터 마지막 페이지 설정
 					let totalCount = parseInt(json.response.body.totalCount)
 					let numOfRows  = parseInt(json.response.body.numOfRows)
 					let maxPage    = Math.ceil(totalCount / numOfRows)

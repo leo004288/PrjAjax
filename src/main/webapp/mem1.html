@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>시프티 회원가입</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <header>
+            <h1>환영합니다!</h1>
+            <p>통합 인력관리 솔루션 시프티, 지금 바로 시작해보세요.</p>
+        </header>
+
+        <form id="signupForm">
+            <div class="input-group">
+                <label>이메일</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="input-group">
+                <label>비밀번호</label>
+                <input type="password" id="password" required>
+                <span class="guide">* 10자 이상이면서 영문, 숫자, 특수문자를 모두 포함하세요</span>
+            </div>
+
+            <div class="input-group">
+                <label>비밀번호 재확인</label>
+                <input type="password" id="passwordConfirm" required>
+                <span class="guide">* 비밀번호를 다시 입력해주세요</span>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label>이름</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="input-group">
+                    <label>전화번호 (선택)</label>
+                    <input type="tel" id="phone">
+                </div>
+            </div>
+
+            <div class="agreement-section">
+                <div class="checkbox-item all-agree">
+                    <input type="checkbox" id="checkAll">
+                    <label for="checkAll">모두 동의합니다</label>
+                </div>
+                <hr>
+                <div class="checkbox-item">
+                    <input type="checkbox" class="single-check" id="ageCheck" required>
+                    <label for="ageCheck">[필수] 만 14세 이상입니다</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" class="single-check" id="termsCheck" required>
+                    <label for="termsCheck">[필수] 최종이용자 이용약관에 동의합니다</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" class="single-check" id="privacyCheck" required>
+                    <label for="privacyCheck">[필수] 개인정보 수집 및 이용에 동의합니다</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">가입하기</button>
+        </form>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <div class="social-login">
+            <button class="btn-social google">구글 계정으로 가입하기</button>
+            <button class="btn-social naver">네이버 계정으로 가입하기</button>
+            <div class="row">
+                <button class="btn-social sso">SSO로 가입하기</button>
+                <button class="btn-social kakaowork">카카오워크로 가입하기</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
