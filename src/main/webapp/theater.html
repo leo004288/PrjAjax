@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	
+	button {
+			background-color: burlywood;
+			color:ivory;
+			border-style: none;
+			border-radius: 5px;
+			}
+	
+	ul {
+		border: 1px solid burlywood;
+		border-radius: 5px; 
+		margin:10px;
+		} 
+		
+	img {width:500px; height:300px;} 
+	
+	
+</style>
+</head>
+<body>
+	<h2>부산 연극</h2>
+	page<input type="number" id="page" value="1" min="1">
+	<button>ok</button>
+	<div id="output"></div>
+	
+	<script>
+	
+		const pageEl   = document.getElementById("page")
+		const btnEl    = document.querySelector("button")
+		const outputEl = document.getElementById("output")
+		
+		btnEl.addEventListener('click', function() {
+			let url = "http://apis.data.go.kr/6260000/BusanCulturePlayDetailService/getBusanCulturePlayDetail"
+			url    += "?serviceKey=18151d56f4c325c1489ed0137f503b5cb51a30bfabd28674381d5128b7a49907"
+			url    += "&pageNo=1"
+			url    += "&numOfRows=10"
+			url    += '&resultType=json'
+			
+			fetch(url)
+			.then(response => response.json())
+			.then(json => {
+				let itemList = json.getBusanCulturePlayDetail.item
+				display(itemList)
+			})
+			.catch(error => console.log(error))
+		})
+		
+		function display(itemList) {
+			let html  = ''
+			
+			itemList.forEach(function(item, i) {
+				html += `
+					<ul>
+						<li>제목       : ${item.title     }</li>
+						<li>공연시작일 : ${item.op_st_dt  }</li>
+						<li>공연종료일 : ${item.op_ed_dt  }</li>
+						<li>오픈런     : ${item.op_at     }</li>
+						<li>시설명     : ${item.place_nm  }</li>
+						<li>런타임     : ${item.runtime   }</li>
+						<li>관람회차   : ${item.showtime  }</li>
+						<li>관람연령   : ${item.rating    }</li>
+						<li>가격       : ${item.price     }</li>
+						<li>원작       : ${item.original  }</li>
+						<li>출연진     : ${item.casting   }</li>
+						<li>제작진     : ${item.crew      }</li>
+						<li>기획사     : ${item.enterprise}</li>
+						<li>평균별점   : ${item.avg_star  }</li>
+						<li><a href="${item.dabom_url}">공연정보</a></li>
+					</ul>
+					`
+			})
+			
+			outputEl.innerHTML = html
+		}
+		
+	</script>
+</body>
+</html>
