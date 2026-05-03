@@ -38,13 +38,19 @@
 		btnEl.addEventListener('click', function() {
 			let url = "http://apis.data.go.kr/6260000/BusanCulturePlayDetailService/getBusanCulturePlayDetail"
 			url    += "?serviceKey=18151d56f4c325c1489ed0137f503b5cb51a30bfabd28674381d5128b7a49907"
-			url    += "&pageNo=1"
+			url    += "&pageNo=" + pageEl.value
 			url    += "&numOfRows=10"
 			url    += '&resultType=json'
 			
 			fetch(url)
 			.then(response => response.json())
 			.then(json => {
+				console.log(json)
+				let totcnt = parseInt(json.getBusanCulturePlayDetail.totalCount)
+				let nor    = parseInt(json.getBusanCulturePlayDetail.numOfRows)
+				let mp     = Math.ceil(totcnt / nor)
+ 				pageEl.max = mp
+				
 				let itemList = json.getBusanCulturePlayDetail.item
 				display(itemList)
 			})
